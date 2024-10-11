@@ -15,6 +15,14 @@ router.get(
     .isLength({ min: 3, max: 5 })
     .withMessage("must be at least 3 - 5 chars"),
   (req, res) => {
+    console.log(req.sessionID)
+    req.sessionStore.get(req.session.id , (err, sessionData)=>{
+      if(err){
+        console.log(err);
+        throw err
+      }
+      console.log(sessionData)
+    })
     const result = validationResult(req);
     console.log(result);
     console.log(req.query);
